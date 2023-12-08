@@ -337,7 +337,7 @@ def create_and_run_azure_ml_pipeline(
         type=AssetTypes.MLFLOW_MODEL,
         name=finetuned_model_name,
         version=timestamp,  # use timestamp as version to avoid version conflict
-        description= test_model_name + " fine tuned model for emotion detection",
+        description= test_model_name + " fine tuned model for question-answering",
         )
         print("prepare to register model inside loop:", prepare_to_register_model)
     
@@ -420,7 +420,7 @@ if __name__ == "__main__":
     # if test_trigger_next_model == "true":
     #     set_next_trigger_model(queue)
     # print values of all above variables
-    print("Running for QA")
+    print("Running for Question Answering")
     print (f"test_subscription_id: {queue['subscription']}")
     print (f"test_resource_group: {queue['resource_group']}")
     print (f"test_workspace_name: {queue['workspace']}")
