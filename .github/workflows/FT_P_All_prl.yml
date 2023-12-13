@@ -16,7 +16,7 @@ jobs:
     runs-on: self-hosted
     steps:
     - name: Install Azure CLI
-      run: curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+      run: pip install azure-cli
     - name: check-out-repo-step
       uses: actions/checkout@v3
     - name: azure-login-step
