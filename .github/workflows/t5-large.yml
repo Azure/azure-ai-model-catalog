@@ -47,7 +47,7 @@ jobs:
       run: pip install datasets
     - name: Import_Model-step
       id: Import-model-step
-      run: python generic_eval.py
+      run: python generic_eval_HF.py
       working-directory: tests/src/pipeline_component_automation
     - name: trigger-next-model-step
       env:
