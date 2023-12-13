@@ -16,7 +16,6 @@ jobs:
     runs-on: self-hosted
     steps:
     - uses: elstudio/action-install-azure-cli@v1
-    - uses: azure/webapps-deploy@v2
     - name: check-out-repo-step
       uses: actions/checkout@v3
     - name: azure-login-step
