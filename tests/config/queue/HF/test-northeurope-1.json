@@ -1,7 +1,7 @@
 {
     "queue_name": "test-northeurope-1",
     "models": [
-        "roberta-base-openai-detector"
+        "roberta-large-mnli"
         
     ],
     "workspace": "test-southcentralus",
