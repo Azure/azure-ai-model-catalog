@@ -1,6 +1,7 @@
 {
     "queue_name": "test-BE",
     "models": [
+        "oss-ft-bert-base-cased",
         "oss-ft-t5-small",
         "oss-ft-mistralai/Mistral-7B-v0.1",
         "oss-ft-facebook/bart-large-cnn"
