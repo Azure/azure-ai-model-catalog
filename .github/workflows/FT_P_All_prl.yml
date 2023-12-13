@@ -15,7 +15,8 @@ jobs:
   deploy-model-job:
     runs-on: self-hosted
     steps:
-    - uses: elstudio/action-install-azure-cli@v1
+    - name: Install AZ
+      run : curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
     - name: check-out-repo-step
       uses: actions/checkout@v3
     - name: azure-login-step
