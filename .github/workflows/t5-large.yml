@@ -1,4 +1,4 @@
-name: t5-large-parallel
+name: t5-large
 
 on: 
   workflow_dispatch:
