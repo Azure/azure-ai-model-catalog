@@ -1,4 +1,4 @@
-name: bert-base-uncased-parallel
+name: bert-base-uncased
 
 on: 
   workflow_dispatch:
