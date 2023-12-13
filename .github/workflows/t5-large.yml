@@ -1,13 +1,13 @@
-name: MLFlow-t5-large
+name: t5-large-parallel
 
 on: 
   workflow_dispatch:
 
 env:
-  test_model_name: t5-large
+  # test_model_name: bert-base-cased
   test_sku_type: cpu
   test_trigger_next_model: true
-  test_queue: test-japaneast-2
+  test_queue: test-northeurope-1
   test_set: huggingface-all
   test_keep_looping: false
 
@@ -43,10 +43,12 @@ jobs:
       run: pip install sentencepiece
     - name: pip-install-fugashi[unidic-lite]
       run: pip install fugashi[unidic-lite]  
-    - name: deploy-model-step
-      id: deploy-model-step
-      run: python generic_initial_automation.py
-      working-directory: tests/src/automation_for_constant_library
+    - name: pip-install-datasets
+      run: pip install datasets
+    - name: Import_Model-step
+      id: Import-model-step
+      run: python generic_eval.py
+      working-directory: tests/src/pipeline_component_automation
     - name: trigger-next-model-step
       env:
         GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
