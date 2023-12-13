@@ -1,11 +1,11 @@
 #!/bin/bash
 
 # Assuming you have a list of runner IPs or hostnames
-runners=("runner1.example.com" "runner2.example.com" "runner3.example.com")
+runners=("internalRunnersTest")
 
 # Assuming you have a GitHub repository and token
-repo="your/repo"
-token="your_github_token"
+repo="Azure/azure-ai-model-catalog"
+token="secrets.WORKFLOW_TOKEN"
 
 # Loop through the list of runners and trigger registration/start
 for runner in "${runners[@]}"; do
