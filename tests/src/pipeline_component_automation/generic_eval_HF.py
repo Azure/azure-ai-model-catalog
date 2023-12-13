@@ -186,7 +186,7 @@ def evaluation_pipeline(task, mlflow_model, test_data, input_column_names, label
                 type=AssetTypes.URI_FILE, path=evaluation_file_path),
             # config cluster/device job is running on
             # set device to GPU/CPU on basis if GPU count was found
-            device="cpu",
+            # device="cpu",
         )
         return {"evaluation_result": evaluation_job.outputs.evaluation_result}
     except Exception as ex:
