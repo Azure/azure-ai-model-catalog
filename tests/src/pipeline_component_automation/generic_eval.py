@@ -171,7 +171,7 @@ def evaluation_pipeline(task, mlflow_model, test_data, input_column_names, label
         logger.info("Started configuring the job")
         #data_path = "./datasets/translation.json"
         pipeline_component_func = registry_ml_client.components.get(
-            name="mlflow_oss_model_evaluation_pipeline", version="0.0.17j.ghyadav_trtr2"
+            name="mlflow_oss_model_evaluation_pipeline", version="0.0.18"
         )
         evaluation_job = pipeline_component_func(
             # specify the foundation model available in the azureml system registry or a model from the workspace
@@ -270,7 +270,7 @@ if __name__ == "__main__":
             "evaluation-recommended-sku", "donotdelete-DS4v2")
         else:
             model_detail = ModelDetail(workspace_ml_client=azureml_registry)
-            foundation_model = model_detail.get_model_detail(test_model_name=test_model_name)
+            foundation_model = model_detail.get_model_detail(test_model_name=test_model_name,version=latest-1)
             computelist = foundation_model.properties.get(
             "evaluation-recommended-sku", "donotdelete-DS4v2")
         if "," in computelist:
