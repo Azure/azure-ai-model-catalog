@@ -1,8 +1,8 @@
 {
     "queue_name": "test-eastus-0",
     "models": [
-"bert-large-uncased"
-,"finiteautomata/bertweet-base-sentiment-analysis"
+"bert-large-cased",
+"bert-base-uncased"
 
     ],
     "workspace": "test-eastus",
