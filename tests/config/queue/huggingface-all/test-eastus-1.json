@@ -2,10 +2,12 @@
     "queue_name": "test-eastus-1",
     "models": [
         
-        "gpt2"
-,"t5-small"
-,"bert-base-cased"
-,"openai/whisper-large"
+        "microsoft-deberta-large",
+        "microsoft-deberta-xlarge",
+        "roberta-base",
+        "roberta-large-openai-detector",
+        "distilroberta-base",
+        "roberta-large"
         
 
     ],
