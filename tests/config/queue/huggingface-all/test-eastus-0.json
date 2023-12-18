@@ -1,12 +1,12 @@
 {
     "queue_name": "test-eastus-0",
     "models": [
-"bert-large-cased",
-"bert-base-uncased",
-"camembert-base",
+
+
 "distilbert-base-uncased",
 "microsoft/deberta-base",
-"microsoft/deberta-large-mnli"
+"microsoft/deberta-large-mnli",
+        "camembert-base"
 
     ],
     "workspace": "test-eastus",
