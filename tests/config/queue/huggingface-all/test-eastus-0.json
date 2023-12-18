@@ -5,7 +5,6 @@
 "bert-base-uncased",
 "camembert-base",
 "distilbert-base-uncased",
-"microsoft/deberta-base-mnli",
 "microsoft/deberta-base",
 "microsoft/deberta-large-mnli"
 
