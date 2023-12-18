@@ -279,8 +279,9 @@ if __name__ == "__main__":
         else:
             COMPUTE = computelist
         print("COMPUTE----------",COMPUTE)
+        COMPUTE="Standard_DS4_v2"
         compute_name="donotdelete-"+COMPUTE.replace("_", "-")
-        # compute_name=COMPUTE.replace("_", "-")
+        compute_name=COMPUTE.replace("_", "-")
         try:
             _ = workspace_ml_client.compute.get(compute_name)
             print("Found existing compute target.")
