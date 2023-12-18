@@ -2,12 +2,13 @@
     "queue_name": "test-eastus-1",
     "models": [
         
-        "microsoft-deberta-large",
-        "microsoft-deberta-xlarge",
+       
         "roberta-base",
         "roberta-large-openai-detector",
         "distilroberta-base",
-        "roberta-large"
+        "roberta-large",
+         "microsoft/deberta-large",
+        "microsoft/deberta-xlarge"
         
 
     ],
