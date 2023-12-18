@@ -162,7 +162,7 @@ def evaluation_pipeline(task, mlflow_model, test_data, input_column_names, label
         logger.info("Started configuring the job")
         #data_path = "./datasets/translation.json"
         pipeline_component_func = registry_ml_client.components.get(
-            name="mlflow_oss_model_evaluation_pipeline", version="0.0.17j.ghyadav_trtr2"
+            name="mlflow_oss_model_evaluation_pipeline", version="0.0.18"
         )
         evaluation_job = pipeline_component_func(
             # specify the foundation model available in the azureml system registry or a model from the workspace
@@ -270,8 +270,9 @@ if __name__ == "__main__":
         else:
             COMPUTE = computelist
         print("COMPUTE----------",COMPUTE)
+        COMPUTE="Standard_DS4_v2"
         compute_name="donotdelete-"+COMPUTE.replace("_", "-")
-        # compute_name=COMPUTE.replace("_", "-")
+        compute_name=COMPUTE.replace("_", "-")
         try:
             _ = workspace_ml_client.compute.get(compute_name)
             print("Found existing compute target.")
