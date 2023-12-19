@@ -3,8 +3,11 @@
     "models": [
         
        
-        "roberta-large-mnli",
-        "microsoft/deberta-xlarge"
+        "distilroberta-base",
+        "roberta-large",
+        "microsoft/deberta-xlarge",
+        "microsoft/deberta-large"
+        
         
 
     ],
