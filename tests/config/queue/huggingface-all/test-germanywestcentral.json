@@ -1,14 +1,13 @@
 {
-    "queue_name": "test-germanywestcentral-1",
+    "queue_name": "test-germanywestcentral",
     "models": [
-        "MLFlow-mosaicml/mpt-7b",
-        "MLFlow-tiiuae/falcon-7b"
+              "ccdv/lsg-camembert-base-4096"
     ],
     "workspace": "test-germanywestcentral",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",
     "resource_group": "huggingface-registry-test1",
     "registry": "HuggingFace",
     "environment": "automate-venv",
-    "compute": "Standard-E96as-v4",
-    "instance_type": "Standard_E96as_v4"
+    "compute": "Standard-DS5-v2",
+    "instance_type": "Standard_DS5_v2"
 }
