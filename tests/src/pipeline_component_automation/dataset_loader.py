@@ -97,7 +97,7 @@ class LoadDataset:
             logger.error(
                 f"::Error:: Error occuring while downloading the datasets and the exception is this : \n {ex}")
 
-    def summarization(self):
+    def text_summarization'(self):
         try:
             logger.info(f"Data path is this one : {self.data_path} and result is this : {os.path.exists(self.data_path)}")
             if not os.path.exists(self.data_path):
