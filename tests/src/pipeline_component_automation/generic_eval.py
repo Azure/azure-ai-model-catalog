@@ -268,6 +268,13 @@ if __name__ == "__main__":
             foundation_model = model_detail.get_model_detail(test_model_name=model)
             computelist = foundation_model.properties.get(
             "evaluation-recommended-sku", "donotdelete-DS4v2")
+        elif "microsoft" in test_model_name:
+            a = test_model_name.index('/')+1
+            model=test_model_name[a:]
+            model_detail = ModelDetail(workspace_ml_client=registry_ml_client)
+            foundation_model = model_detail.get_model_detail(test_model_name=model)
+            computelist = foundation_model.properties.get(
+            "evaluation-recommended-sku", "donotdelete-DS4v2")
         else:
             model_detail = ModelDetail(workspace_ml_client=azureml_registry)
             foundation_model = model_detail.get_model_detail(test_model_name=test_model_name)
