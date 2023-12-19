@@ -22,7 +22,8 @@ jobs:
       with:
         creds: ${{secrets.AZ_CRED}}
     - name: set-hf-token
-      run: echo"HF_token=${{ secrets.HF_TOKEN }}">>$GITHUB_ENV
+      run: echo "HF_token=${{ secrets.HF_TOKEN }}" >> $GITHUB_ENV
+
     - name: pip-install-azure-ai-ml
       run: pip install azure-ai-ml
     - name: pip-install-azureml-core
