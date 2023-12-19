@@ -1,8 +1,7 @@
 {
     "queue_name": "test-southcentralus-0",
     "models": [
-        "deepset-minilm-uncased-squad2",
-        "roberta-large",
+        
         "jean-baptiste-camembert-ner"
     ],
     "workspace": "test-southcentralus",
