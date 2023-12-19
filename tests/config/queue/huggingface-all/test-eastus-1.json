@@ -3,9 +3,7 @@
     "models": [
         
        
-        "distilroberta-base",
-        "roberta-large",
-         "microsoft/deberta-large",
+        "roberta-large-mnli",
         "microsoft/deberta-xlarge"
         
 
