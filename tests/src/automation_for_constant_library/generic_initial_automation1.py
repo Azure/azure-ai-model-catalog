@@ -10,6 +10,7 @@ import os
 import sys
 from box import ConfigBox
 from utils.logging import get_logger
+from HF_credentials import get_huggingface_token
 
 # constants
 check_override = True
