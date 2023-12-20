@@ -191,8 +191,8 @@ def evaluation_pipeline(task, mlflow_model, test_data, input_column_names, label
             # config file containing the details of evaluation metrics to calculate
             # evaluation_config=Input(
             #     type=AssetTypes.URI_FILE, path="./evaluation/eval_config.json"),
-            # evaluation_config=Input(
-            #     type=AssetTypes.URI_FILE, path=evaluation_file_path),
+            evaluation_config=Input(
+                type=AssetTypes.URI_FILE, path=evaluation_file_path),
             # config cluster/device job is running on
             # set device to GPU/CPU on basis if GPU count was found
             device="auto",
