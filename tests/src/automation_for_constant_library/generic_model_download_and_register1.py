@@ -198,7 +198,7 @@ class Model:
         try:
             # Load the library from the transformer
             model_library = getattr(transformers, model_library_name)
-            login(token=ACCESS_TOKEN)
+            login(token=huggingface_token)
             logger.info("Started loading the model from library")
             # From the library load the model
             # model = model_library.from_pretrained(self.model_name)
