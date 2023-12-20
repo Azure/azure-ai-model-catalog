@@ -186,9 +186,9 @@ class Model:
             logger.error(
                 f"::Error:: This model : {self.model_name} or related tokenizer can not downloaded from the AutoModel or Autotokenizer\n {ex}")
             raise Exception(ex)
-            # model = model_library.from_pretrained(self.model_name, trust_remote_code=True, token=ACCESS_TOKEN)
-            # tokenizer = AutoTokenizer.from_pretrained(self.model_name, trust_remote_code=True, token=ACCESS_TOKEN)
-        model_and_tokenizer = {"model": model, "tokenizer": tokenizer}
+               model = model_library.from_pretrained(self.model_name, trust_remote_code=True, token=ACCESS_TOKEN)
+               tokenizer = AutoTokenizer.from_pretrained(self.model_name, trust_remote_code=True, token=ACCESS_TOKEN)
+            model_and_tokenizer = {"model": model, "tokenizer": tokenizer}
         return model_and_tokenizer
 
     def register_model_in_workspace(self, model_and_tokenizer: dict, scoring_input: ConfigBox, task: str, registered_model_name: str, client):
