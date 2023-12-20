@@ -159,7 +159,9 @@ class Model:
         except Exception as ex:
             logger.error(
             f"::Error:: This model : {self.model_name} or related tokenizer cannot be downloaded from the AutoModel or AutoTokenizer\n {ex}")
-            print("Exception details:", ex)  # Add this line to print exception details
+            print("Exception details:", ex)  
+            import traceback
+            traceback.print_exc() 
             raise Exception(ex)
 
         return model_and_tokenizer
