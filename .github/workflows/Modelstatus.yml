@@ -36,7 +36,7 @@ jobs:
       #   run: |
       #     cd dashboard/HuggingFace/Dashboard_Archive
       #     python dashboard.py
-      - name: Run Python Script from other folder to create README in main folder
+      - name: Run Python Script from other folder to create modelstatus.txt in main folder
         run: |
           cd tests/src/pipeline_component_automation
           python generic_eval_log.py
