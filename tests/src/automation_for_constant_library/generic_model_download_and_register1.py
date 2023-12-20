@@ -158,8 +158,10 @@ class Model:
             model_and_tokenizer = {"model": model, "tokenizer": tokenizer}
         except Exception as ex:
             logger.error(
-                f"::Error:: This model : {self.model_name} or related tokenizer cannot be downloaded from the AutoModel or AutoTokenizer\n {ex}")
+            f"::Error:: This model : {self.model_name} or related tokenizer cannot be downloaded from the AutoModel or AutoTokenizer\n {ex}")
+            print("Exception details:", ex)  # Add this line to print exception details
             raise Exception(ex)
+
         return model_and_tokenizer
 
     # def download_model_and_tokenizer(self, task: str) -> dict:
