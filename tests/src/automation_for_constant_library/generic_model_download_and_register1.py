@@ -105,6 +105,7 @@ class Model:
         pattern = r'[0-9\s+]'
         # Replace number and space
         final_data = re.sub(pattern, '', required_data)
+        print(final_data)
         return final_data
 
     def get_sample_input_data(self, task: str):
