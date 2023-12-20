@@ -149,66 +149,66 @@ class Model:
                 f"::Error:: Could not find library from here :{model_with_library}.Here is the exception\n{e}")
         return model_with_library.get(task)
 
-    def download_model_and_tokenizer(self, task: str) -> dict:
-        try:
-            model_library = getattr(transformers, self.get_library_to_load_model(task=task))
-            login(token=ACCESS_TOKEN)
-            logger.info("Started loading the model from the library")
-            model = model_library.from_pretrained(self.model_name, trust_remote_code=True, use_auth_token=True)
-            tokenizer = AutoTokenizer.from_pretrained(self.model_name, trust_remote_code=True, use_auth_token=True)
-            model_and_tokenizer = {"model": model, "tokenizer": tokenizer}
-        except Exception as ex:
-            logger.error(
-            f"::Error:: This model : {self.model_name} or related tokenizer cannot be downloaded from the AutoModel or AutoTokenizer\n {ex}")
-            print("Exception details:", ex)  
-            import traceback
-            traceback.print_exc() 
-            raise Exception(ex)
-
-        return model_and_tokenizer
-
     # def download_model_and_tokenizer(self, task: str) -> dict:
-    #     """" This method will download the model and tokenizer and return it in a 
-    #     dictionary
-
-    #     Args:
-    #         task (str): task name
-
-    #     Returns:
-    #         dict: model and tokenizer
-    #     """
-    #     # model_detail = AutoConfig.from_pretrained(self.model_name)
-    #     # res_dict = model_detail.to_dict().get("architectures")
-    #     # if res_dict is not None:
-    #     #     model_library_name = res_dict[0]
-    #     # else:
-    #     #     rare_model_dict = self.load_rare_model()
-    #     #     model_library_name = rare_model_dict.get(self.model_name)
-    #     #model_library_name = model_detail.to_dict()["architectures"][0]
-
-    #     # Get the library name from this method from which we will load the model
-    #     model_library_name = self.get_library_to_load_model(task=task)
-    #     logger.info(f"Library name is this one : {model_library_name}")
     #     try:
-    #         # Load the library from the transformer
-    #         model_library = getattr(transformers, model_library_name)
+    #         model_library = getattr(transformers, self.get_library_to_load_model(task=task))
     #         login(token=ACCESS_TOKEN)
-    #         logger.info("Started loading the model from library")
-    #         # From the library load the model
-    #         # model = model_library.from_pretrained(self.model_name)
-    #         # tokenizer = AutoTokenizer.from_pretrained(self.model_name)
-    #         model = model_library.from_pretrained(
-    #             self.model_name, trust_remote_code=True, use_auth_token=True)
-    #         tokenizer = AutoTokenizer.from_pretrained(
-    #             self.model_name, trust_remote_code=True, use_auth_token=True)
+    #         logger.info("Started loading the model from the library")
+    #         model = model_library.from_pretrained(self.model_name, trust_remote_code=True, use_auth_token=True)
+    #         tokenizer = AutoTokenizer.from_pretrained(self.model_name, trust_remote_code=True, use_auth_token=True)
+    #         model_and_tokenizer = {"model": model, "tokenizer": tokenizer}
     #     except Exception as ex:
     #         logger.error(
-    #             f"::Error:: This model : {self.model_name} or related tokenizer can not downloaded from the AutoModel or Autotokenizer\n {ex}")
+    #         f"::Error:: This model : {self.model_name} or related tokenizer cannot be downloaded from the AutoModel or AutoTokenizer\n {ex}")
+    #         print("Exception details:", ex)  
+    #         import traceback
+    #         traceback.print_exc() 
     #         raise Exception(ex)
-    #     model = model_library.from_pretrained(self.model_name, trust_remote_code=True, token=ACCESS_TOKEN)
-    #     tokenizer = AutoTokenizer.from_pretrained(self.model_name, trust_remote_code=True, token=ACCESS_TOKEN)
-    #     model_and_tokenizer = {"model": model, "tokenizer": tokenizer}
+
     #     return model_and_tokenizer
+
+    def download_model_and_tokenizer(self, task: str) -> dict:
+        """" This method will download the model and tokenizer and return it in a 
+        dictionary
+
+        Args:
+            task (str): task name
+
+        Returns:
+            dict: model and tokenizer
+        """
+        # model_detail = AutoConfig.from_pretrained(self.model_name)
+        # res_dict = model_detail.to_dict().get("architectures")
+        # if res_dict is not None:
+        #     model_library_name = res_dict[0]
+        # else:
+        #     rare_model_dict = self.load_rare_model()
+        #     model_library_name = rare_model_dict.get(self.model_name)
+        #model_library_name = model_detail.to_dict()["architectures"][0]
+
+        # Get the library name from this method from which we will load the model
+        model_library_name = self.get_library_to_load_model(task=task)
+        logger.info(f"Library name is this one : {model_library_name}")
+        try:
+            # Load the library from the transformer
+            model_library = getattr(transformers, model_library_name)
+            login(token=ACCESS_TOKEN)
+            logger.info("Started loading the model from library")
+            # From the library load the model
+            # model = model_library.from_pretrained(self.model_name)
+            # tokenizer = AutoTokenizer.from_pretrained(self.model_name)
+            model = model_library.from_pretrained(
+                self.model_name, trust_remote_code=True, use_auth_token=True)
+            tokenizer = AutoTokenizer.from_pretrained(
+                self.model_name, trust_remote_code=True, use_auth_token=True)
+        except Exception as ex:
+            logger.error(
+                f"::Error:: This model : {self.model_name} or related tokenizer can not downloaded from the AutoModel or Autotokenizer\n {ex}")
+            raise Exception(ex)
+              # model = model_library.from_pretrained(self.model_name, trust_remote_code=True, token=ACCESS_TOKEN)
+              # tokenizer = AutoTokenizer.from_pretrained(self.model_name, trust_remote_code=True, token=ACCESS_TOKEN)
+            model_and_tokenizer = {"model": model, "tokenizer": tokenizer}
+        return model_and_tokenizer
 
     def register_model_in_workspace(self, model_and_tokenizer: dict, scoring_input: ConfigBox, task: str, registered_model_name: str, client):
         """ It will load the pipeline with the model name if its a fill mask task then it will get the 
