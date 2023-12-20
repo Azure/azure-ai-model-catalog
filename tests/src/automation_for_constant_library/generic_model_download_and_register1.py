@@ -22,14 +22,9 @@ import json
 
 
 
-def get_huggingface_token():
-    # Load the configuration from the JSON file
-    with open('hf_cred.json', 'r') as config_file:
-        config = json.load(config_file)
- 
-    # Retrieve the Hugging Face token from the configuration
-    huggingface_token = config.get('huggingface', {}).get('token', '')
-    return huggingface_token
+with open("hf_cred.json", "r") as f:    
+    config = json.load(f) 
+    huggingface_token = config["huggingface_token"]
  
 
 
@@ -209,9 +204,9 @@ class Model:
             # model = model_library.from_pretrained(self.model_name)
             # tokenizer = AutoTokenizer.from_pretrained(self.model_name)
             model = model_library.from_pretrained(
-                self.model_name, trust_remote_code=True, use_auth_token=True)
+                self.model_name, trust_remote_code=True, use_auth_token=True,token=huggingface_token)
             tokenizer = AutoTokenizer.from_pretrained(
-                self.model_name, trust_remote_code=True, use_auth_token=True)
+                self.model_name, trust_remote_code=True, use_auth_token=True,token=huggingface_token)
         except Exception as ex:
             logger.error(
                 f"::Error:: This model : {self.model_name} or related tokenizer can not downloaded from the AutoModel or Autotokenizer\n {ex}")
