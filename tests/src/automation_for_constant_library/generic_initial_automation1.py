@@ -10,12 +10,15 @@ import os
 import sys
 from box import ConfigBox
 from utils.logging import get_logger
-from HF_credentials import get_huggingface_token
+#from HF_credentials import get_huggingface_token
 
 # constants
 check_override = True
 
 logger = get_logger(__name__)
+
+def get_huggingface_token():
+    return os.environ.get('HF_token', '')
 
 def get_error_messages():
     # load ../config/errors.json into a dictionary
