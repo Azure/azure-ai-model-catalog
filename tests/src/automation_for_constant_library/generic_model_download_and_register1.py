@@ -21,8 +21,19 @@ import re
 import json
 
 
-# import json
-import json
+
+def get_huggingface_token():
+    # Load the configuration from the JSON file
+    with open('hf_cred.json', 'r') as config_file:
+        config = json.load(config_file)
+ 
+    # Retrieve the Hugging Face token from the configuration
+    huggingface_token = config.get('huggingface', {}).get('token', '')
+    return huggingface_token
+ 
+
+
+
 # store the URL in url as
 # parameter for urlopen
 URL = "https://huggingface.co/api/models?sort=downloads&direction=-1&limit=10000"
