@@ -1,4 +1,4 @@
-name: Update README with Timestamp
+name: Update Multi-Models
 
 on:
   workflow_dispatch
@@ -38,18 +38,18 @@ jobs:
       #     python dashboard.py
       - name: Run Python Script from other folder to create README in main folder
         run: |
-          cd dashboard/HuggingFace
-          python dashboard.py
+          cd tests/src/pipeline_component_automation
+          python generic_eval_log.py
       - name: Add Generated File
         run: |
           git config user.email "${{ secrets.USER_EMAIL }}"
           git config user.name "${{ secrets.USER_NAME }}"
           git pull origin main
           cd dashboard/HuggingFace
-          git add README.md          
+          git add modelstatus.txt         
           # Attempt to commit changes and handle errors
           set +e
-          git commit -m "Add README.md"
+          git commit -m "modelstatus.txt"
           commit_status=$?
           set -e
           if [ $commit_status -eq 0 ]; then
@@ -72,7 +72,7 @@ jobs:
       #     git add "$readme_filename"
       #     set +e
       #     # Commit and push the changes
-      #     git commit -m "Add $readme_filename"
+      #     git commit -m "Add $me_filename"
       #     commit_status=$?
       #     set -e
       #     if [ $commit_status -eq 0 ]; then
