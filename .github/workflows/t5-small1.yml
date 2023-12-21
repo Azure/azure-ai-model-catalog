@@ -53,7 +53,7 @@ jobs:
       run: pip install datasets
     - name: deploy-model-step
       id: deploy-model-step
-      run: python generic_initial_automation1.py
+      run: python generic_model_download_and_register1.py
       working-directory: tests/src/automation_for_constant_library
       env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
