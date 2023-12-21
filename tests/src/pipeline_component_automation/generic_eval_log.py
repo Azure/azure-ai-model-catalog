@@ -363,6 +363,26 @@ if __name__ == "__main__":
             _, _, exc_tb = sys.exc_info()
             logger.error(f"The exception occured at this line no : {exc_tb.tb_lineno}" +
                          f" the exception is this one : \n {ex}")
+
+        model_info_list = []
+        model_info_list.append({
+        'Model Name': {test_model_name},
+        'Status': 'Fail',
+        'Error': {ex} 
+        })
+        result_df = pd.DataFrame(model_info_list)
+        existing_csv_file_path = 'tests/config/output_result.csv'
+        try:
+            existing_data_df = pd.read_csv(existing_csv_file_path)
+            result_df = pd.concat([existing_data_df, result_df], ignore_index=True)
+        except FileNotFoundError:
+            pass
+        result_df.to_csv(existing_csv_file_path, index=False, mode='a')
+        print(result_df)
+
+
+            
             raise Exception(ex)
         logger.info("Proceeding with inference and deployment")
+
    
