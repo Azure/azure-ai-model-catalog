@@ -11,13 +11,16 @@ jobs:
       token: ${{ secrets.WORKFLOW_TOKEN }}
 
     steps:
-      - name: Checkout code
+      - name: check-out-repo-step
         uses: actions/checkout@v3
+      - name: azure-login-step
+        uses: azure/login@v1
         with:
-          lfs: true
-          repository: Azure/azure-ai-model-catalog
-          branch: main
-          token: ${{ secrets.WORKFLOW_TOKEN }}
+          creds: ${{secrets.AZ_CRED}}
+          # lfs: true
+          # repository: Azure/azure-ai-model-catalog
+          # branch: main
+          # token: ${{ secrets.WORKFLOW_TOKEN }}
 
       - name: Set up Python
         uses: actions/setup-python@v2
