@@ -1,3 +1,4 @@
+
 name: t5-small1
 
 on: 
@@ -14,8 +15,6 @@ env:
 jobs:
   deploy-model-job:
     runs-on: ubuntu-latest
-    env:
-        HF_TOKEN: ${{ secrets.HF_TOKEN }}
     steps:
     - name: check-out-repo-step
       uses: actions/checkout@v3
@@ -23,7 +22,6 @@ jobs:
       uses: azure/login@v1
       with:
         creds: ${{secrets.AZ_CRED}}
-        
     # - name: set-hf-token
     #   run: echo "HF_token=${{ secrets.HF_TOKEN }}" >> $GITHUB_ENV
 
@@ -55,8 +53,6 @@ jobs:
       id: deploy-model-step
       run: python generic_initial_automation1.py
       working-directory: tests/src/automation_for_constant_library
-      env:
-          HF_TOKEN: ${{ secrets.HF_TOKEN }}
     - name: trigger-next-model-step
       env:
         GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
