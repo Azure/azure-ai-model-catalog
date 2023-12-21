@@ -1,7 +1,7 @@
 {
     "queue_name": "test-germanywestcentral",
     "models": [
-              "t5-small",
+              
               "bert-base-uncased"
     ],
     "workspace": "test-germanywestcentral",
