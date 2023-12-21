@@ -43,13 +43,10 @@ jobs:
       - name: Add Generated File
         run: |
           git config user.email "${{ secrets.USER_EMAIL }}"
-          git config user.name "${{ secrets.USER_NAME }}"
-          git pull origin main
-          cd dashboard/HuggingFace
-          git add modelstatus.txt         
+          git config user.name "${{ secrets.USER_NAME }}"         
           # Attempt to commit changes and handle errors
           set +e
-          git commit -m "modelstatus.txt"
+          git commit -m "output_result.csv"
           commit_status=$?
           set -e
           if [ $commit_status -eq 0 ]; then
