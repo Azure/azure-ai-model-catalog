@@ -206,9 +206,9 @@ class Model:
             # model = model_library.from_pretrained(self.model_name)
             # tokenizer = AutoTokenizer.from_pretrained(self.model_name)
             model = model_library.from_pretrained(
-                self.model_name, trust_remote_code=True, use_auth_token=True)
+                self.model_name, trust_remote_code=True, token=True)
             tokenizer = AutoTokenizer.from_pretrained(
-                self.model_name, trust_remote_code=True, use_auth_token=True)
+                self.model_name, trust_remote_code=True, token=True)
             #model_and_tokenizer = {"model": model, "tokenizer": tokenizer}
         except Exception as ex:
             logger.error(
