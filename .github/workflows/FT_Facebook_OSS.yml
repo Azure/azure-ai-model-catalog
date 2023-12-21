@@ -1,7 +1,6 @@
 name: oss-ft-facebook/bart-large-cnn
 
 on:
-  on: 
   workflow_dispatch:
 
 env:
