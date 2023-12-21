@@ -41,8 +41,8 @@ jobs:
           
           # Attempt to commit changes and handle errors
           set +e
-          git add output_result.csv
-          git commit -m "Update output_result.csv"
+          # git add output_result.csv
+          git commit -m "output_result.csv"
           commit_status=$?
           set -e
           
