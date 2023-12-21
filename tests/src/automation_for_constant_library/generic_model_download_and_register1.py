@@ -20,11 +20,13 @@ import mlflow
 import re
 import json
 
+huggingface_token = os.environ.get("HF_TOKEN")
 
 
-with open("hf_cred.json", "r") as f:    
-    config = json.load(f) 
-    huggingface_token = config["huggingface_token"]
+
+# with open("hf_cred.json", "r") as f:    
+#     config = json.load(f) 
+#     huggingface_token = config["huggingface_token"]
  
 
 
