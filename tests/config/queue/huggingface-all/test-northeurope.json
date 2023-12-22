@@ -1,15 +1,9 @@
 {
-    "queue_name": "test-northeurope",
-    "models": [
-              
-              "bert-base-uncased",
-              "t5-small"
-    ],
     "workspace": "test-northeurope",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",
     "resource_group": "huggingface-registry-test1",
     "registry": "HuggingFace",
     "environment": "automate-venv",
-    "compute": "Standard-DS5-v2",
-    "instance_type": "Standard_DS5_v2"
+    "compute": "STANDARD-E64S-V3",
+    "instance_type": "STANDARD_E64S_V3"
 }
