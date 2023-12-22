@@ -1,0 +1,43 @@
+name: multi-register-models
+
+on:
+  workflow_dispatch:
+    inputs:
+      model_list:
+        description: 'List of models to deploy'
+        required: true
+
+env:
+  test_sku_type: cpu
+  test_set: huggingface-all
+  test_queue: test-northeurope
+
+jobs:
+  deploy-models:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: check-out-repo-step
+        uses: actions/checkout@v3
+
+      - name: azure-login-step
+        uses: azure/login@v1
+        with:
+          creds: ${{secrets.AZURE_CREDENTIALS}}
+
+      - name: install-dependencies
+        run: |
+          pip install azure-ai-ml azureml-core datasets azureml-mlflow==1.53.0 transformers transformers[torch] torchvision mlflow python-box sacremoses sentencepiece fugashi[unidic-lite]
+
+      - name: deploy-models
+        id: deploy-models-step
+        working-directory: tests/src/automation_for_constant_library
+        run: |
+          for model in ${{ fromJson(inputs.model_list) }}; do
+            echo "Deploying model: $model"
+            python generic_initial_automation1.py "$model"
+          done
+
+      - name: handle-deploy-model-failures
+        if: failure()
+        run: echo "Deployment failed for some models. Check logs for details."
