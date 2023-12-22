@@ -35,7 +35,7 @@ jobs:
         run: |
           for model in ${{ fromJson(inputs.model_list) }}; do
             echo "Deploying model: $model"
-            python generic_initial_automation1.py "$model"
+            python generic_initial_automation_test.py "$model"
           done
 
       - name: handle-deploy-model-failures
