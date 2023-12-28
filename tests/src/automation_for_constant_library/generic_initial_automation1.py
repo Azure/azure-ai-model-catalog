@@ -30,7 +30,7 @@ def get_error_messages():
 error_messages = get_error_messages()
 
 # model to test
-# test_model_name = os.environ.get('test_model_name')
+test_model_name = os.environ.get('test_model_name')
 
 # test cpu or gpu template
 test_sku_type = os.environ.get('test_sku_type')
@@ -82,7 +82,7 @@ def set_next_trigger_model(queue):
     if check_mlflow_model in model_list:
         index = model_list.index(check_mlflow_model)
     else:
-        index = model_list.index("MLFlow-MP-"+test_model_name)
+        index = model_list.index(test_model_name)
     #index = model_list.index(test_model_name)
     logger.info(f"index of {test_model_name} in queue: {index}")
 # if index is not the last element in the list, get the next element in the list
@@ -143,7 +143,7 @@ if __name__ == "__main__":
     queue = get_test_queue()
     model_list = list(queue.models)
     for test_model_name in model_list:
-    
+        
         # sku_override = get_sku_override()
         # if sku_override is None:
         #     check_override = False
@@ -196,14 +196,23 @@ if __name__ == "__main__":
             name=queue.environment, version=str(latest_version))
         logger.info(f"Latest Environment : {latest_env}")
         command_job = run_azure_ml_job(code="./", command_to_run="python generic_model_download_and_register1.py",
-                                       environment=latest_env, compute=queue.compute, environment_variables=environment_variables)
-        create_and_get_job_studio_url(command_job, workspace_ml_client)
-    
-        InferenceAndDeployment = ModelInferenceAndDeployemnt(
-            test_model_name=test_model_name.lower(),
-            workspace_ml_client=workspace_ml_client,
-            registry=queue.registry
-        )
-        InferenceAndDeployment.model_infernce_and_deployment(
-            instance_type=queue.instance_type
-        )
+                                        environment=latest_env, compute=queue.compute, environment_variables=environment_variables)
+
+        try:
+            create_and_get_job_studio_url(command_job, workspace_ml_client)
+            InferenceAndDeployment = ModelInferenceAndDeployemnt(
+                test_model_name=test_model_name.lower(),
+                workspace_ml_client=workspace_ml_client,
+                registry=queue.registry
+            )
+            InferenceAndDeployment.model_infernce_and_deployment(
+                instance_type=queue.instance_type
+            )
+        except Exception as ex:
+            logger.info(f"The failed model is this one: {test_model_name}")
+            logger.warning(f"Model Failed due to this {ex}")
+    # except Exception as e:
+    #      # Log the exception, you can customize this part based on your needs
+    #      logger.error(f"Error processing model {model_name}: {str(e)}")
+    #      # Continue to the next model
+    #continue
