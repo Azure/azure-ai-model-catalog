@@ -110,7 +110,7 @@ def assign_models_to_queues(models, workspace_list):
             print (f"workspace instance: {workspace}")
             for thread in range(parallel_tests):
                 print (f"thread instance: {thread}")
-                if i < len(models):
+                if i < len(models)-1:
                     if workspace not in queue:
                         queue[workspace] = {}
                         print("queue[workspace]",queue[workspace])
