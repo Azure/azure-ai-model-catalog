@@ -1,10 +1,10 @@
-name: brian-lim/smile-style-transfer
+name: tkcho/cp-commerce-clf-kr-sku-brand-30b29f92ad9fbbaa767d3d923195f1d0
 
 on: 
   workflow_dispatch:
 
 env:
-  test_model_name: brian-lim/smile-style-transfer
+  test_model_name: tkcho/cp-commerce-clf-kr-sku-brand-30b29f92ad9fbbaa767d3d923195f1d0
   test_sku_type: cpu
   test_trigger_next_model: true
   test_queue: test-northeurope-0
