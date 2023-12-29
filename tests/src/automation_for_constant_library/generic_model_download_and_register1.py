@@ -335,6 +335,11 @@ class Model:
                     "<mask>", pipeline_tokenizer.mask_token).replace("[MASK]", pipeline_tokenizer.mask_token)
 
         output = loaded_model_pipeline(scoring_input.input_data)
+        output1=["capital","life"]
+        if output==output1:
+            print("model output is true")
+        else:
+            print("model output is false"
         logger.info(f"My outupt is this : {output}")
 
 
