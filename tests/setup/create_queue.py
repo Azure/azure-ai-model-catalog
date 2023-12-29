@@ -110,7 +110,7 @@ def assign_models_to_queues(models, workspace_list):
             print (f"workspace instance: {workspace}")
             for thread in range(parallel_tests):
                 print (f"thread instance: {thread}")
-                if i < len(models)-1:
+                if i < len(models):
                     if workspace not in queue:
                         queue[workspace] = {}
                         print("queue[workspace]",queue[workspace])
@@ -147,6 +147,31 @@ def assign_models_to_queues(models, workspace_list):
                     else:
                         print (f"Found {model_count} models across {len(queue)} queues, which is equal to count of models in models list")
                     return queue
+    if LOG:
+        print("current working directory is:", os.getcwd())
+        # if assign_models_to_queues under log_dir does not exist, create it
+        print("args.log_dir:", args.log_dir)
+        
+        if not os.path.exists(f"{args.log_dir}/assign_models_to_queues"):
+            logpath=Path(f"{args.log_dir}/assign_models_to_queues")
+            os.makedirs(logpath)
+            print("logs created:" f"{args.log_dir}/assign_models_to_queues")
+        # generate filename as DDMMMYYYY-HHMMSS.json
+        timestamp = time.strftime("%d%b%Y-%H%M%S.json")
+        # write queue to file
+        with open(f"{args.log_dir}/assign_models_to_queues/{timestamp}", 'w') as f:
+            json.dump(queue, f, indent=4)
+    # validate that count of models across all queues is equal to count of models in models list
+    model_count=0
+    for workspace in queue:
+        for thread in queue[workspace]:
+            model_count=model_count+len(queue[workspace][thread])
+    if model_count != len(models):
+        print (f"Error: Model count mismatch. Expected {len(models)} but found {model_count}")
+        exit (1)
+    else:
+        print (f"Found {model_count} models across {len(queue)} queues, which is equal to count of models in models list")
+    return queue
 # function to create workflow files
 # !!! any existing workflow files in workflow_dir will be overwritten. backup... !!!
 def create_workflow_files(q,workspace_list):
