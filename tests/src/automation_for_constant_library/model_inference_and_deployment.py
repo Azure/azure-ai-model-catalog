@@ -231,7 +231,7 @@ class ModelInferenceAndDeployemnt:
                 '', latest_model_name)
             latest_model_name = latest_model_name.lstrip("-")
 
-        return latest_model_name
+        return latest_model_name.lower()
 
     def create_online_deployment(self, latest_model, online_endpoint_name, model_package, instance_type):
         logger.info("In create_online_deployment...")
