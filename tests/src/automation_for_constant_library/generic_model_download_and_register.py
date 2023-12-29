@@ -33,7 +33,7 @@ TASK_NAME = ['fill-mask', 'token-classification', 'question-answering',
              'summarization', 'text-generation', 'text-classification', 'translation','automatic-speech-recognition']
 STRING_TO_CHECK = 'transformers'
 FILE_NAME = "task_and_library.json"
-ACCESS_TOKEN = os.environ.get('access_token')
+#ACCESS_TOKEN = os.environ.get('access_token')
 
 test_model_name = os.environ.get('test_model_name')
 logger = get_logger(__name__)
@@ -173,6 +173,9 @@ class Model:
         try:
             # Load the library from the transformer
             model_library = getattr(transformers, model_library_name)
+            with open("hf_cred.json", "r") as f:    
+                config = json.load(f) 
+                ACCESS_TOKEN = config["huggingface_token"]
             login(token=ACCESS_TOKEN)
             logger.info("Started loading the model from library")
             # From the library load the model
@@ -188,7 +191,7 @@ class Model:
             raise Exception(ex)
               # model = model_library.from_pretrained(self.model_name, trust_remote_code=True, token=ACCESS_TOKEN)
               # tokenizer = AutoTokenizer.from_pretrained(self.model_name, trust_remote_code=True, token=ACCESS_TOKEN)
-            model_and_tokenizer = {"model": model, "tokenizer": tokenizer}
+        model_and_tokenizer = {"model": model, "tokenizer": tokenizer}
         return model_and_tokenizer
 
     def register_model_in_workspace(self, model_and_tokenizer: dict, scoring_input: ConfigBox, task: str, registered_model_name: str, client):

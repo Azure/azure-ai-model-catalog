@@ -13,14 +13,14 @@ env:
 
 jobs:
   deploy-model-job:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
     - name: check-out-repo-step
       uses: actions/checkout@v3
     - name: azure-login-step
       uses: azure/login@v1
       with:
-        creds: ${{secrets.TEST_WS_CRED}}
+        creds: ${{secrets.AZ_CRED}}
     - name: pip-install-azure-ai-ml
       run: pip install azure-ai-ml
     - name: pip-install-azureml-core
@@ -47,13 +47,8 @@ jobs:
       run: pip install datasets
     - name: import-evaluate-step
       id: import-evaluate-step
-      run: python test_generic_pipeline_automation.py
-      working-directory: tests/src/pipeline_component_automation
-    - name: deploy-model-step
-      id: deploy-model-step
-      run: python generic_oss_model_deployment.py
-      working-directory: tests/src/oss_model_deployment
-
+      run: python generic_initial_automation.py
+      working-directory: tests/src/automation_for_constant_library
     - name: trigger-next-model-step
       env:
         GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
