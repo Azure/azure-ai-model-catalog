@@ -8,6 +8,6 @@
     "resource_group": "huggingface-registry-test1",
     "registry": "HuggingFace",
     "environment": "automate-venv",
-    "compute": "Standard-E64s-v3",
-    "instance_type": "Standard_E64s_v3"
+    "compute": "STANDARD-DS5-V2",
+    "instance_type": "STANDARD_DS5_V2"
 }
