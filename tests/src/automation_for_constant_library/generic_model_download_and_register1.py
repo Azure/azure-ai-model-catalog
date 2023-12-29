@@ -339,7 +339,7 @@ class Model:
         if output==output1:
             print("model output is true")
         else:
-            print("model output is false"
+            print("model output is false")
         logger.info(f"My outupt is this : {output}")
 
 
