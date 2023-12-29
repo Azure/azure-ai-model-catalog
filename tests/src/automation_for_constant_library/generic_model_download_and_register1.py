@@ -335,7 +335,7 @@ class Model:
                     "<mask>", pipeline_tokenizer.mask_token).replace("[MASK]", pipeline_tokenizer.mask_token)
 
         output = loaded_model_pipeline(scoring_input.input_data)
-        output1=["capital","life"]
+        output1=["Ich mag Sie, ich liebe Sie","Heute war ein schrecklicher Tag"]
         if output==output1:
             print("model output is true")
         else:
