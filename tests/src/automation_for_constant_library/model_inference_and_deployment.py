@@ -73,28 +73,35 @@ class ModelInferenceAndDeployemnt:
         return foundation_model
 
     def get_model_output(self, task, latest_model, scoring_input):
-        model_sourceuri = latest_model.properties["mlflow.modelSourceUri"]
-        loaded_model_pipeline = mlflow.transformers.load_model(
-            model_uri=model_sourceuri)
-        logger.info(
-            f"Latest model name : {latest_model.name} and latest model version : {latest_model.version}", )
-        if task == "fill-mask":
-            pipeline_tokenizer = loaded_model_pipeline.tokenizer
-            for index in range(len(scoring_input.input_data)):
-                scoring_input.input_data[index] = scoring_input.input_data[index].replace(
-                    "<mask>", pipeline_tokenizer.mask_token).replace("[MASK]", pipeline_tokenizer.mask_token)
+        try:
+            model_sourceuri = latest_model.properties["mlflow.modelSourceUri"]
+            loaded_model_pipeline = mlflow.transformers.load_model(
+                model_uri=model_sourceuri)
+            logger.info(
+                f"Latest model name : {latest_model.name} and latest model version : {latest_model.version}", )
+            if task == "fill-mask":
+                pipeline_tokenizer = loaded_model_pipeline.tokenizer
+                for index in range(len(scoring_input.input_data)):
+                    scoring_input.input_data[index] = scoring_input.input_data[index].replace(
+                        "<mask>", pipeline_tokenizer.mask_token).replace("[MASK]", pipeline_tokenizer.mask_token)
 
-        output_from_pipeline = loaded_model_pipeline(scoring_input.input_data)
-        logger.info(f"My outupt is this :  {output_from_pipeline}")
-        #output_from_pipeline = model_pipeline(scoring_input.input_data)
-        for index in range(len(output_from_pipeline)):
-            if len(output_from_pipeline[index]) != 0:
-                logger.info(
-                    f"This model is giving output in this index: {index}")
-                logger.info(
-                    f"Started creating dictionary with this input {scoring_input.input_data[index]}")
-                dic_obj = {"input_data": [scoring_input.input_data[index]]}
-                return dic_obj
+            output_from_pipeline = loaded_model_pipeline(scoring_input.input_data)
+            logger.info(f"My outupt is this :  {output_from_pipeline}")
+            #output_from_pipeline = model_pipeline(scoring_input.input_data)
+            for index in range(len(output_from_pipeline)):
+                if len(output_from_pipeline[index]) != 0:
+                    logger.info(
+                        f"This model is giving output in this index: {index}")
+                    logger.info(
+                        f"Started creating dictionary with this input {scoring_input.input_data[index]}")
+                    dic_obj = {"input_data": [scoring_input.input_data[index]]}
+                    return dic_obj
+        except Exception as ex:
+            _, _, exc_tb = sys.exc_info()
+            logger.error(
+                f"::Error:: Getting error while creating and saving the jsonfile, the error is occuring at this line no : {exc_tb.tb_lineno}" +
+                f"reason is this : \n {ex}")
+            raise Exception(ex)
 
     def create_json_file(self, file_name, dicitonary):
         logger.info("Inside the create json file method...")
@@ -137,20 +144,24 @@ class ModelInferenceAndDeployemnt:
                     "::warning:: Trying to invoking the endpoint again by changing the input data and file")
                 logger.warning(
                     f"::warning:: This is failed due to this :\n {ex}")
-                dic_obj = self.get_model_output(
-                    task=task, latest_model=latest_model, scoring_input=scoring_input)
-                logger.info(f"Our new input is this one: {dic_obj}")
-                json_file_name, scoring_input = self.create_json_file(
-                    file_name=deployment_name, dicitonary=dic_obj)
-                logger.info("Online endpoint invoking satrted...")
-                response = self.workspace_ml_client.online_endpoints.invoke(
-                    endpoint_name=online_endpoint_name,
-                    deployment_name=deployment_name,
-                    request_file=json_file_name,
-                )
-                logger.info(
-                    f"Getting the reposne from the endpoint is this one : {response}")
-                self.delete_file(file_name=json_file_name)
+                message = str(ex)
+                if 'upstream' not in message:
+                    dic_obj = self.get_model_output(
+                        task=task, latest_model=latest_model, scoring_input=scoring_input)
+                    logger.info(f"Our new input is this one: {dic_obj}")
+                    json_file_name, scoring_input = self.create_json_file(
+                        file_name=deployment_name, dicitonary=dic_obj)
+                    logger.info("Online endpoint invoking satrted...")
+                    response = self.workspace_ml_client.online_endpoints.invoke(
+                        endpoint_name=online_endpoint_name,
+                        deployment_name=deployment_name,
+                        request_file=json_file_name,
+                    )
+                    logger.info(
+                        f"Getting the reposne from the endpoint is this one : {response}")
+                    self.delete_file(file_name=json_file_name)
+                else:
+                    raise Exception(message)
             response_json = json.loads(response)
             output = json.dumps(response_json, indent=2)
             logger.info(f"response: \n\n{output}")
@@ -231,7 +242,7 @@ class ModelInferenceAndDeployemnt:
                 '', latest_model_name)
             latest_model_name = latest_model_name.lstrip("-")
 
-        return latest_model_name.lower()
+        return latest_model_name
 
     def create_online_deployment(self, latest_model, online_endpoint_name, model_package, instance_type):
         logger.info("In create_online_deployment...")
@@ -285,7 +296,7 @@ class ModelInferenceAndDeployemnt:
                 name=online_endpoint_name).wait()
             exit(1)
 
-        return deployment_name
+        return deployment_name.lower()
 
     def delete_online_endpoint(self, online_endpoint_name):
         try:
@@ -312,20 +323,20 @@ class ModelInferenceAndDeployemnt:
                 f"::Error:: Could not find scoring_file: {scoring_file}. Finishing without sample scoring: \n{e}")
         return scoring_file, scoring_input
 
-    def local_inference(self, task, latest_model, scoring_input):
-        model_sourceuri = latest_model.properties["mlflow.modelSourceUri"]
-        loaded_model_pipeline = mlflow.transformers.load_model(
-            model_uri=model_sourceuri)
-        print(
-            f"Latest model name : {latest_model.name} and latest model version : {latest_model.version}", )
-        if task == "fill-mask":
-            pipeline_tokenizer = loaded_model_pipeline.tokenizer
-            for index in range(len(scoring_input.input_data)):
-                scoring_input.input_data[index] = scoring_input.input_data[index].replace(
-                    "<mask>", pipeline_tokenizer.mask_token).replace("[MASK]", pipeline_tokenizer.mask_token)
+    # def local_inference(self, task, latest_model, scoring_input):
+    #     model_sourceuri = latest_model.properties["mlflow.modelSourceUri"]
+    #     loaded_model_pipeline = mlflow.transformers.load_model(
+    #         model_uri=model_sourceuri)
+    #     print(
+    #         f"Latest model name : {latest_model.name} and latest model version : {latest_model.version}", )
+    #     if task == "fill-mask":
+    #         pipeline_tokenizer = loaded_model_pipeline.tokenizer
+    #         for index in range(len(scoring_input.input_data)):
+    #             scoring_input.input_data[index] = scoring_input.input_data[index].replace(
+    #                 "<mask>", pipeline_tokenizer.mask_token).replace("[MASK]", pipeline_tokenizer.mask_token)
 
-        output = loaded_model_pipeline(scoring_input.input_data)
-        print("My outupt is this : ", output)
+    #     output = loaded_model_pipeline(scoring_input.input_data)
+    #     print("My outupt is this : ", output)
 
     def model_infernce_and_deployment(self, instance_type):
         expression_to_ignore = ["/", "\\", "|", "@", "#", ".",
