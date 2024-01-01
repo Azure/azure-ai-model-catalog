@@ -320,20 +320,20 @@ class ModelInferenceAndDeployemnt:
 
         return deployment_name.lower()
 
-    def delete_online_endpoint(self, online_endpoint_name):
-        try:
-            logger.info("\n In delete_online_endpoint.....")
-            self.workspace_ml_client.online_endpoints.begin_delete(
-                name=online_endpoint_name
-            ).wait()
-        except Exception as e:
-            _, _, exc_tb = sys.exc_info()
-            logger.error(
-                f"The exception occured at this line no : {exc_tb.tb_lineno}"
-                + f" the exception is this one : {e}"
-            )
-            logger.error(f"::warning:: Could not delete endpoint: : \n{e}")
-            exit(0)
+    # def delete_online_endpoint(self, online_endpoint_name):
+    #     try:
+    #         logger.info("\n In delete_online_endpoint.....")
+    #         self.workspace_ml_client.online_endpoints.begin_delete(
+    #             name=online_endpoint_name
+    #         ).wait()
+    #     except Exception as e:
+    #         _, _, exc_tb = sys.exc_info()
+    #         logger.error(
+    #             f"The exception occured at this line no : {exc_tb.tb_lineno}"
+    #             + f" the exception is this one : {e}"
+    #         )
+    #         logger.error(f"::warning:: Could not delete endpoint: : \n{e}")
+    #         exit(0)
 
     def get_task_specified_input(self, task):
         # scoring_file = f"../../config/sample_inputs/{self.registry}/{task}.json"
