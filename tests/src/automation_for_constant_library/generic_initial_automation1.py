@@ -228,7 +228,7 @@ if __name__ == "__main__":
         )
         command_job = run_azure_ml_job(
             code="./",
-            command_to_run="python generic_model_download_and_register1.py",
+            command_to_run="python generic_model_download_and_register.py",
             environment=latest_env,
             compute=queue.compute,
             environment_variables=environment_variables,
