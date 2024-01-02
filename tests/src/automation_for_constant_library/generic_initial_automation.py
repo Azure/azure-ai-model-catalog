@@ -246,3 +246,4 @@ if __name__ == "__main__":
     except Exception as ex:
         logger.info(f"The failed model is this one: {test_model_name}")
         logger.warning(f"Model Failed due to this {ex}")
+        raise Exception(str(ex))
