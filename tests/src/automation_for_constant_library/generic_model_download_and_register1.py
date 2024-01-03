@@ -21,9 +21,11 @@ import re
 import json
 
 # huggingface_token = os.environ.get("HF_TOKEN")
+a={
+    "Translation":[{'translation_text': 'Ich mag Sie, ich liebe Sie.'}, {'translation_text': 'Heute war ein schrecklicher Tag'}],
+    "text_classification":[{"label":"CONTRADICTION"}, {"score":0.5827531814575195}]
 
-
-
+}
 with open("hf_cred.json", "r") as f:    
     config = json.load(f) 
     huggingface_token = config["huggingface_token"]
