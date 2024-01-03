@@ -139,6 +139,27 @@ class Model:
                 f"::Error:: Could not find scoring_file: {scoring_file}. Finishing without sample scoring: \n{e}")
 
         return scoring_input
+    def get_sample_ouput_data(self, task: str):
+        """This method will load the sample input data based on the task name
+
+        Args:
+            task (str): task name
+
+        Returns:
+            _type_: _description_
+        """
+        scoring_ouput_file = f"sample_ouput/{task}.json"
+        # check of scoring_file exists
+        print("task:---------:",task)
+        try:
+            with open(scoring_ouput_file) as f:
+                scoring_output = ConfigBox(json.load(f))
+                logger.info(f"scoring_output file:\n\n {scoring_output}\n\n")
+        except Exception as e:
+            logger.error(
+                f"::Error:: Could not find scoring_file: {scoring_output_file}. Finishing without sample scoring: \n{e}")
+
+        return scoring_output     
 
     def get_library_to_load_model(self, task: str) -> str:
         """ Takes the task name and load the  json file findout the library 
@@ -339,7 +360,7 @@ class Model:
         output = loaded_model_pipeline(scoring_input.input_data)
         print(output)
         #output1=[{'translation_text': 'Ich mag Sie, ich liebe Sie.'}, {'translation_text': 'Heute war ein schrecklicher Tag'}]
-        if output==a[task]:
+        if output == scoring_output:
             print("model output is true")
         else:
             print("model output is false")
@@ -352,6 +373,8 @@ if __name__ == "__main__":
     task = model.get_task()
     # Get the sample input data
     scoring_input = model.get_sample_input_data(task=task)
+    # Get the sample output data
+    scoring_output = model.get_sample_output_data(task=task)
     logger.info(f"This is the task associated to the model : {task}")
     expression_to_ignore = ["/", "\\", "|", "@", "#", ".",
                             "$", "%", "^", "&", "*", "<", ">", "?", "!", "~"]
