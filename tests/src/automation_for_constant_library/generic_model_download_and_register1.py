@@ -338,8 +338,8 @@ class Model:
 
         output = loaded_model_pipeline(scoring_input.input_data)
         print(output)
-        output1=[{'translation_text': 'Ich mag Sie, ich liebe Sie.'}, {'translation_text': 'Heute war ein schrecklicher Tag'}]
-        if output==output1:
+        #output1=[{'translation_text': 'Ich mag Sie, ich liebe Sie.'}, {'translation_text': 'Heute war ein schrecklicher Tag'}]
+        if output==a[task]:
             print("model output is true")
         else:
             print("model output is false")
