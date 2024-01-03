@@ -1,6 +1,7 @@
 {
     "queue_name": "test-japaneast-50",
     "models": [
+        "distilbert-base-uncased-distilled-squad",
         "t5-small",
         "roberta-large-mnli"
     ],
