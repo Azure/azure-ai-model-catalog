@@ -12,6 +12,7 @@ from box import ConfigBox
 from utils.logging import get_logger
 from azure.core.exceptions import ResourceNotFoundError
 from azure.ai.ml.entities import ManagedOnlineEndpoint
+import logging
 
 # from HF_credentials import get_huggingface_token
 huggingface_token = os.environ.get("HF_TOKEN")
@@ -228,7 +229,7 @@ if __name__ == "__main__":
         )
         command_job = run_azure_ml_job(
             code="./",
-            command_to_run="python generic_model_download_and_register.py",
+            command_to_run="python generic_model_download_and_register1.py",
             environment=latest_env,
             compute=queue.compute,
             environment_variables=environment_variables,
