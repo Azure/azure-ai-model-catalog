@@ -360,11 +360,16 @@ class Model:
         output = loaded_model_pipeline(scoring_input.input_data)
         print(output)
         output1=[{'score': 0.994688093662262, 'start': 11, 'end': 16, 'answer': 'Clara'}]
+        # if output == output1:
+        #     print("model output is true")
+        # else:
+        #     print("model output is false")
+        logger.info(f"My outupt is this : {output}")
+        logger.info(f"HF output is this :{output1}")
         if output == output1:
             print("model output is true")
         else:
-            print("model output is false")
-        logger.info(f"My outupt is this : {output}")
+            print("model output is false"
 
 
 if __name__ == "__main__":
