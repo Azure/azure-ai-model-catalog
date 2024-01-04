@@ -21,11 +21,11 @@ import re
 import json
 
 # huggingface_token = os.environ.get("HF_TOKEN")
-a={
-    "Translation":[{'translation_text': 'Ich mag Sie, ich liebe Sie.'}, {'translation_text': 'Heute war ein schrecklicher Tag'}],
-    "text_classification":[{"label":"CONTRADICTION"}, {"score":0.5827531814575195}]
+# a={
+#     "Translation":[{'translation_text': 'Ich mag Sie, ich liebe Sie.'}, {'translation_text': 'Heute war ein schrecklicher Tag'}],
+#     "text_classification":[{"label":"CONTRADICTION"}, {"score":0.5827531814575195}]
 
-}
+# }
 with open("hf_cred.json", "r") as f:    
     config = json.load(f) 
     huggingface_token = config["huggingface_token"]
@@ -360,16 +360,16 @@ class Model:
         output = loaded_model_pipeline(scoring_input.input_data)
         print(output)
         output1=[{'score': 0.994688093662262, 'start': 11, 'end': 16, 'answer': 'Clara'}]
-        # if output == output1:
-        #     print("model output is true")
-        # else:
-        #     print("model output is false")
-        logger.info(f"My outupt is this : {output}")
-        logger.info(f"HF output is this :{output1}")
         if output == output1:
             print("model output is true")
         else:
-            print("model output is false"
+            print("model output is false")
+        logger.info(f"My outupt is this : {output}")
+        # logger.info(f"HF output is this :{output1}")
+        # if output == output1:
+        #     print("model output is true")
+        # else:
+        #     print("model output is false"
 
 
 if __name__ == "__main__":
