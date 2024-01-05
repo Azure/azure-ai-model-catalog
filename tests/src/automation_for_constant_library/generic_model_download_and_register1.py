@@ -401,4 +401,3 @@ if __name__ == "__main__":
         task=task, scoring_input=scoring_input, registered_model_name=registered_model_name, client=client)
     model.registered_model_inference(
         task=task, scoring_input=scoring_input, registered_model_name=registered_model_name, client=client)
-    print("HF output = ",output1)
