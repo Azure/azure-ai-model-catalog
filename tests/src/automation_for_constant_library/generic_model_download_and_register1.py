@@ -140,7 +140,7 @@ class Model:
                 f"::Error:: Could not find scoring_file: {scoring_file}. Finishing without sample scoring: \n{e}")
 
         return scoring_input
-    def get_sample_ouput_data(self, task: str):
+    def get_sample_output_data(self, task: str):
         """This method will load the sample output result based on the task name
 
         Args:
