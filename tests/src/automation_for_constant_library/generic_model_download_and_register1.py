@@ -381,7 +381,7 @@ if __name__ == "__main__":
     # Get the sample input data
     scoring_input = model.get_sample_input_data(task=task)
     # Get the sample output data
-    #scoring_output = model.get_sample_output_data(task=task)
+    scoring_hf_output = model.get_sample_output_data(task=task)
     logger.info(f"This is the task associated to the model : {task}")
     expression_to_ignore = ["/", "\\", "|", "@", "#", ".",
                             "$", "%", "^", "&", "*", "<", ">", "?", "!", "~"]
