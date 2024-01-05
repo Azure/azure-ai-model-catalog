@@ -141,7 +141,7 @@ class Model:
 
         return scoring_input
     # def get_sample_ouput_data(self, task: str):
-    #     """This method will load the sample input data based on the task name
+    #     """This method will load the sample output result based on the task name
 
     #     Args:
     #         task (str): task name
@@ -181,23 +181,6 @@ class Model:
                 f"::Error:: Could not find library from here :{model_with_library}.Here is the exception\n{e}")
         return model_with_library.get(task)
 
-    # def download_model_and_tokenizer(self, task: str) -> dict:
-    #     try:
-    #         model_library = getattr(transformers, self.get_library_to_load_model(task=task))
-    #         login(token=ACCESS_TOKEN)
-    #         logger.info("Started loading the model from the library")
-    #         model = model_library.from_pretrained(self.model_name, trust_remote_code=True, use_auth_token=True)
-    #         tokenizer = AutoTokenizer.from_pretrained(self.model_name, trust_remote_code=True, use_auth_token=True)
-    #         model_and_tokenizer = {"model": model, "tokenizer": tokenizer}
-    #     except Exception as ex:
-    #         logger.error(
-    #         f"::Error:: This model : {self.model_name} or related tokenizer cannot be downloaded from the AutoModel or AutoTokenizer\n {ex}")
-    #         print("Exception details:", ex)  
-    #         import traceback
-    #         traceback.print_exc() 
-    #         raise Exception(ex)
-
-    #     return model_and_tokenizer
 
     def download_model_and_tokenizer(self, task: str) -> dict:
         """" This method will download the model and tokenizer and return it in a 
@@ -358,13 +341,31 @@ class Model:
                 scoring_input.input_data[index] = scoring_input.input_data[index].replace(
                     "<mask>", pipeline_tokenizer.mask_token).replace("[MASK]", pipeline_tokenizer.mask_token)
 
-        output = loaded_model_pipeline(scoring_input.input_data)
-        print(output)
-        output1=[{'score': 0.994688093662262, 'start': 11, 'end': 16, 'answer': 'Clara'}]
-        if output == output1:
-            logging.info("Model output Result is true")
-        else:
-            logging.info("Model output Result is false")
+        # output = loaded_model_pipeline(scoring_input.input_data)
+        # print(output)
+        # output1=[{'score': 0.994688093662262, 'start': 11, 'end': 16, 'answer': 'Clara'}]
+        # if output == output1:
+        #     logging.info("Model output Result is true")
+        # else:
+        #     logging.info("Model output Result is false")
+          output = loaded_model_pipeline(scoring_input.input_data)
+          print("Output from model:", output)
+            
+          output1 = [{'score': 0.994688093662262, 'start': 11, 'end': 16, 'answer': 'Clara'}]
+          print("Expected output:", output1)
+            
+          if output == output1:
+              logging.info("Model output Result is true")  
+          else:
+              logging.info("Model output Result is false")
+                
+            
+          # Print the actual values for detailed debugging
+          print("Type of output:", type(output))
+          print("Type of output1:", type(output1))
+          print("Comparison result:", output == output1)
+
+
         #logger.info(f"My outupt is this : {output}")
         # logger.info(f"HF output is this :{output1}")
         # if output == output1:
