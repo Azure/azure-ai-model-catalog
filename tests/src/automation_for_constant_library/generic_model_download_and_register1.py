@@ -341,32 +341,10 @@ class Model:
                 scoring_input.input_data[index] = scoring_input.input_data[index].replace(
                     "<mask>", pipeline_tokenizer.mask_token).replace("[MASK]", pipeline_tokenizer.mask_token)
 
-        # output = loaded_model_pipeline(scoring_input.input_data)
-        # print(output)
-        # output1=[{'score': 0.994688093662262, 'start': 11, 'end': 16, 'answer': 'Clara'}]
-        # if output == output1:
-        #     logging.info("Model output Result is true")
-        # else:
-        #     logging.info("Model output Result is false")
+
         output = loaded_model_pipeline(scoring_input.input_data)
-        print("Output from model:", output)
-            
-        output1 = {'score': 0.994688093662262, 'start': 11, 'end': 16, 'answer': 'Clara'}
-        # print("Expected output:", output1)
-            
-        # if output == output1:
-        #     logging.info("Model output Result is true")  
-        # else:
-        #     logging.info("Model output Result is false")
-                
-            
-        # # Print the actual values for detailed debugging
-        # print("Type of output:", type(output))
-        # print("Type of output1:", type(output1))
-        # print("Comparison result:", output == output1)
-
-
-        logger.info(f"My outupt is this : {output}")
+       
+        logger.info(f"Model outupt is this : {output}")
         logger.info(f"HF output is this :{scoring_hf_output}")
         if output == scoring_hf_output:
             print("Model output is True")
