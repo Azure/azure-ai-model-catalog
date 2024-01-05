@@ -158,7 +158,7 @@ class Model:
                 logger.info(f"scoring_output file:\n\n {scoring_output}\n\n")
         except Exception as e:
             logger.error(
-                f"::Error:: Could not find scoring_file: {scoring_output_file}. Finishing without sample scoring: \n{e}")
+                f"::Error:: Could not find scoring_file: {scoring_ouput_file}. Finishing without sample scoring: \n{e}")
 
         return scoring_hf_output     
 
