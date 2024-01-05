@@ -155,7 +155,7 @@ class Model:
         try:
             with open(scoring_ouput_file) as f:
                 scoring_hf_output = ConfigBox(json.load(f))
-                logger.info(f"scoring_output file:\n\n {scoring_output}\n\n")
+                logger.info(f"scoring_output file:\n\n {scoring_hf_output}\n\n")
         except Exception as e:
             logger.error(
                 f"::Error:: Could not find scoring_file: {scoring_ouput_file}. Finishing without sample scoring: \n{e}")
