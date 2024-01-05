@@ -137,7 +137,7 @@ class ModelInferenceAndDeployemnt:
         logger.info("Started deleting the file...")
         os.remove(path=file_name)
 
-    def cloud_inference(self, scoring_file, scoring_input, online_endpoint_name, deployment_name, task, latest_model):
+    def cloud_inference(self, scoring_file, scoring_input, online_endpoint_name, deployment_name, task, latest_model, endpoint):
         try:
             json_file_name = ""
             logger.info(f"endpoint_name : {online_endpoint_name}")
@@ -193,6 +193,7 @@ class ModelInferenceAndDeployemnt:
             if os.path.exists(json_file_name):
                 logger.info(f"Deleting the json file : {json_file_name}")
                 self.delete_file(file_name=json_file_name)
+            self.delete_online_deployment(endpoint=endpoint, online_endpoint_name=online_endpoint_name, deployment_name=deployment_name)
             logger.error(f"::error:: Could not invoke endpoint: \n")
             logger.info(f"::error::The exception here is this : \n {e}")
             raise Exception(e)
@@ -442,6 +443,7 @@ class ModelInferenceAndDeployemnt:
             deployment_name=deployment_name,
             task=task,
             latest_model=latest_model,
+            endpoint=endpoint
         )
         # self.delete_online_endpoint(online_endpoint_name=online_endpoint_name)
         self.delete_online_deployment(

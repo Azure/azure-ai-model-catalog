@@ -1,13 +1,23 @@
 {
     "queue_name": "test-northeurope-1",
     "models": [
-        "MLFlow-DI-mistralai/Mistral-7B-Instruct-v0.1"
+        "bert-base-cased",
+        "camembert-base",
+        "deepset/minilm-uncased-squad2",
+        "distilbert-base-cased",
+        "distilbert-base-cased-distilled-squad",
+        "distilbert-base-uncased",
+        "microsoft/deberta-base-mnli",
+        "distilroberta-base",
+        "distilbert-base-uncased-finetuned-sst-2-english",
+        "t5-small",
+        "roberta-base"
     ],
     "workspace": "test-northeurope",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",
     "resource_group": "huggingface-registry-test1",
     "registry": "azureml-preview-test1",
     "environment": "automate-venv",
-    "compute": "Standard-D96a-v4",
-    "instance_type": "Standard_D96a_v4"
+    "compute": "Standard-E64s-v3",
+    "instance_type": "Standard_E64s_v3"
 }
