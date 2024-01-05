@@ -351,27 +351,27 @@ class Model:
         output = loaded_model_pipeline(scoring_input.input_data)
         print("Output from model:", output)
             
-        output1 = [{'score': 0.994688093662262, 'start': 11, 'end': 16, 'answer': 'Clara'}]
-        print("Expected output:", output1)
+        output1 = {'score': 0.994688093662262, 'start': 11, 'end': 16, 'answer': 'Clara'}
+        # print("Expected output:", output1)
             
-        if output == output1:
-            logging.info("Model output Result is true")  
-        else:
-            logging.info("Model output Result is false")
+        # if output == output1:
+        #     logging.info("Model output Result is true")  
+        # else:
+        #     logging.info("Model output Result is false")
                 
             
-        # Print the actual values for detailed debugging
-        print("Type of output:", type(output))
-        print("Type of output1:", type(output1))
-        print("Comparison result:", output == output1)
+        # # Print the actual values for detailed debugging
+        # print("Type of output:", type(output))
+        # print("Type of output1:", type(output1))
+        # print("Comparison result:", output == output1)
 
 
-        #logger.info(f"My outupt is this : {output}")
-        # logger.info(f"HF output is this :{output1}")
-        # if output == output1:
-        #     print("model output is true")
-        # else:
-        #     print("model output is false"
+        logger.info(f"My outupt is this : {output}")
+        logger.info(f"HF output is this :{output1}")
+        if output == output1:
+            print("model output is true")
+        else:
+            print("model output is false"
 
 
 if __name__ == "__main__":
@@ -401,3 +401,4 @@ if __name__ == "__main__":
         task=task, scoring_input=scoring_input, registered_model_name=registered_model_name, client=client)
     model.registered_model_inference(
         task=task, scoring_input=scoring_input, registered_model_name=registered_model_name, client=client)
+    print("HF output = ",output1)
