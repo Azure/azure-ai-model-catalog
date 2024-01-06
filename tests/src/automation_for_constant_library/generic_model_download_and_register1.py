@@ -1,7 +1,6 @@
 from transformers import AutoModel, AutoTokenizer, AutoConfig
 import transformers
 #from azureml.core import Workspace
-#from azureml.core import Workspace
 #from azureml.mlflow import get_mlflow_tracking_uri
 from urllib.request import urlopen
 from box import ConfigBox
@@ -19,14 +18,9 @@ import os
 import mlflow
 import re
 import json
-import logging
 
 # huggingface_token = os.environ.get("HF_TOKEN")
-# a={
-#     "Translation":[{'translation_text': 'Ich mag Sie, ich liebe Sie.'}, {'translation_text': 'Heute war ein schrecklicher Tag'}],
-#     "text_classification":[{"label":"CONTRADICTION"}, {"score":0.5827531814575195}]
 
-# }
 with open("hf_cred.json", "r") as f:    
     config = json.load(f) 
     huggingface_token = config["huggingface_token"]
@@ -140,6 +134,7 @@ class Model:
                 f"::Error:: Could not find scoring_file: {scoring_file}. Finishing without sample scoring: \n{e}")
 
         return scoring_input
+        
     def get_sample_output_data(self, task: str):
         """This method will load the sample output result based on the task name
 
@@ -354,7 +349,7 @@ class Model:
 
 if __name__ == "__main__":
     model = Model(model_name=test_model_name)
-    # Get the sample input data
+    # Get the Model Task
     task = model.get_task()
     # Get the sample input data
     scoring_input = model.get_sample_input_data(task=task)
