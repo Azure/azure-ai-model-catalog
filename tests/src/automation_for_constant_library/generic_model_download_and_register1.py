@@ -370,7 +370,27 @@ if __name__ == "__main__":
         # If threr will be model namr with / then replace it
         registered_model_name = test_model_name.lower()
     client = MlflowClient()
-    model.download_and_register_model(
-        task=task, scoring_input=scoring_input, registered_model_name=registered_model_name, client=client)
-    model.registered_model_inference(
-        task=task, scoring_input=scoring_input, registered_model_name=registered_model_name, client=client)
+    # 
+
+# Create an empty list to store the rows of the DataFrame
+    result_rows = []
+
+    # Loop through the models and perform the desired operations
+    for model_name in model_names:
+        model.download_and_register_model(
+            task=task, scoring_input=scoring_input, registered_model_name=registered_model_name, client=client)
+        model.registered_model_inference(
+            task=task, scoring_input=scoring_input, registered_model_name=registered_model_name, client=client)
+
+        # Append a dictionary with the required values to the list
+        result_rows.append({
+            'output': output,
+            'scoring_hf_output': scoring_hf_output,
+            'Model Result': model_result
+        })
+
+    # Create a DataFrame using the list of dictionaries
+    result_df = pd.DataFrame(result_rows)
+
+    # Print or return the DataFrame as needed
+    print(result_df)
