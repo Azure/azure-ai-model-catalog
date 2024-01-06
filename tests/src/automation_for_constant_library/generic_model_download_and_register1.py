@@ -411,6 +411,6 @@ if __name__ == "__main__":
 
     print(df.head())
     # Save DataFrame to CSV
-    csv_filename = "/tests/src/automation_for_constant_library/model_results.csv"
+    csv_filename = "tests/src/automation_for_constant_library/model_results.csv"
     model.save_dataframe_to_csv(df, csv_filename)
    
