@@ -300,13 +300,13 @@ class Model:
             scoring_hf_output (ConfigBox): Sample output data
 
         Returns:
-            pd.DataFrame: DataFrame with columns 'model_name', 'task', 'sample_input_data', 'output', 'sample_output_data'
+            pd.DataFrame: DataFrame with columns 'model_name', 'task', 'sample_input_data', #'output', 'sample_output_data'
         """
         data = {
             'model_name': [self.model_name],
             'task': [task],
             'sample_input_data': [scoring_input.input_data],
-            'output': [loaded_model_pipeline(scoring_input.input_data)], 
+            #'output': [loaded_model_pipeline(scoring_input.input_data)], 
             'sample_output_data': [scoring_hf_output]
         }
         df = pd.DataFrame(data)
