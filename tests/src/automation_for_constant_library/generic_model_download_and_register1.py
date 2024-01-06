@@ -291,6 +291,37 @@ class Model:
         client.set_model_version_tag(
             name=registered_model_name, version=model_detail.version, key="model_name", value=self.model_name)
 
+    def create_dataframe(self, task, scoring_input, scoring_hf_output):
+        """Create a DataFrame with the specified columns.
+
+        Args:
+            task (str): Task name
+            scoring_input (ConfigBox): Sample input data
+            scoring_hf_output (ConfigBox): Sample output data
+
+        Returns:
+            pd.DataFrame: DataFrame with columns 'model_name', 'task', 'sample_input_data', 'output', 'sample_output_data'
+        """
+        data = {
+            'model_name': [self.model_name],
+            'task': [task],
+            'sample_input_data': [scoring_input.input_data],
+            'output': [loaded_model_pipeline(scoring_input.input_data)], 
+            'sample_output_data': [scoring_hf_output]
+        }
+        df = pd.DataFrame(data)
+        return df
+
+    def save_dataframe_to_csv(self, df, csv_filename):
+        """Save the DataFrame to a CSV file.
+
+        Args:
+            df (pd.DataFrame): DataFrame to be saved
+            csv_filename (str): Name of the CSV file
+        """
+        df.to_csv(csv_filename, index=False)
+        print(f"DataFrame saved to {csv_filename}")
+
     def download_and_register_model(self, task, scoring_input, registered_model_name, client) -> dict:
         """ This method will be controlling all execution of methods 
 
@@ -355,6 +386,9 @@ if __name__ == "__main__":
     scoring_input = model.get_sample_input_data(task=task)
     # Get the sample output data
     scoring_hf_output = model.get_sample_output_data(task=task)
+    # Create DataFrame
+    df = model.create_dataframe(task, scoring_input, scoring_hf_output)
+
     logger.info(f"This is the task associated to the model : {task}")
     expression_to_ignore = ["/", "\\", "|", "@", "#", ".",
                             "$", "%", "^", "&", "*", "<", ">", "?", "!", "~"]
@@ -370,27 +404,13 @@ if __name__ == "__main__":
         # If threr will be model namr with / then replace it
         registered_model_name = test_model_name.lower()
     client = MlflowClient()
-    # 
+    model.download_and_register_model(
+        task=task, scoring_input=scoring_input, registered_model_name=registered_model_name, client=client)
+    model.registered_model_inference(
+        task=task, scoring_input=scoring_input, registered_model_name=registered_model_name, client=client)
 
-# Create an empty list to store the rows of the DataFrame
-    result_rows = []
 
-    # Loop through the models and perform the desired operations
-    for model_name in model_names:
-        model.download_and_register_model(
-            task=task, scoring_input=scoring_input, registered_model_name=registered_model_name, client=client)
-        model.registered_model_inference(
-            task=task, scoring_input=scoring_input, registered_model_name=registered_model_name, client=client)
-
-        # Append a dictionary with the required values to the list
-        result_rows.append({
-            'output': output,
-            'scoring_hf_output': scoring_hf_output,
-            'Model Result': model_result
-        })
-
-    # Create a DataFrame using the list of dictionaries
-    result_df = pd.DataFrame(result_rows)
-
-    # Print or return the DataFrame as needed
-    print(result_df)
+    # Save DataFrame to CSV
+    csv_filename = "model_results.csv"
+    model.save_dataframe_to_csv(df, csv_filename)
+   
