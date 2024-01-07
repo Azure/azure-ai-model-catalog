@@ -291,7 +291,7 @@ class Model:
         client.set_model_version_tag(
             name=registered_model_name, version=model_detail.version, key="model_name", value=self.model_name)
 
-    def create_dataframe(self, task, scoring_input, output,scoring_hf_output):
+    def create_dataframe(self, task, scoring_input,scoring_hf_output):
         """Create a DataFrame with the specified columns.
 
         Args:
@@ -306,7 +306,7 @@ class Model:
             'model_name': [self.model_name],
             'task': [task],
             'sample_input_data': [scoring_input.input_data],
-            'output': [loaded_model_pipeline(scoring_input.input_data)], 
+            #'output': [loaded_model_pipeline(scoring_input.input_data)], 
             'sample_output_data': [scoring_hf_output]
         }
         df = pd.DataFrame(data)
@@ -385,7 +385,7 @@ if __name__ == "__main__":
     # Get the sample input data
     scoring_input = model.get_sample_input_data(task=task)
     # Get Model Output
-    output =  [loaded_model_pipeline(scoring_input.input_data)]
+    #output =  [loaded_model_pipeline(scoring_input.input_data)]
     # Get the sample output data
     scoring_hf_output = model.get_sample_output_data(task=task)
     # Create DataFrame
