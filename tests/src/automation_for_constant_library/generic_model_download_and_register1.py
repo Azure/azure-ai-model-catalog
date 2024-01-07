@@ -291,7 +291,7 @@ class Model:
         client.set_model_version_tag(
             name=registered_model_name, version=model_detail.version, key="model_name", value=self.model_name)
 
-    def create_dataframe(self, task, scoring_input, 'output',scoring_hf_output):
+    def create_dataframe(self, task, scoring_input, output,scoring_hf_output):
         """Create a DataFrame with the specified columns.
 
         Args:
