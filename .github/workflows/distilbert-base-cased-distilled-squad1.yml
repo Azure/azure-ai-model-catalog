@@ -58,10 +58,10 @@ jobs:
           git config user.name "${{ secrets.USER_NAME }}"
           git pull origin main
           cd tests/src/automation_for_constant_library
-          git add dataframe_output.csv         
+          git add dataframe_output/model_results.csv         
           # Attempt to commit changes and handle errors
           set +e
-          git commit -m "Add dataframe_output.csv"
+          git commit -m "Add dataframe_output/model_results.csv"
           commit_status=$?
           set -e
           if [ $commit_status -eq 0 ]; then
