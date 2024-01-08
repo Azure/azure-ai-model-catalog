@@ -53,7 +53,22 @@ jobs:
       run: python generic_initial_automation1.py
       working-directory: tests/src/automation_for_constant_library
     - name: Add Generated File
-      run : git commit -m "Add model_results.csv"
+      run: |
+          git config user.email "${{ secrets.USER_EMAIL }}"
+          git config user.name "${{ secrets.USER_NAME }}"
+          git pull origin main
+          cd tests/src/automation_for_constant_library
+          git add dataframe_output.csv         
+          # Attempt to commit changes and handle errors
+          set +e
+          git commit -m "Add dataframe_output.csv"
+          commit_status=$?
+          set -e
+          if [ $commit_status -eq 0 ]; then
+            git push
+          else
+            echo "No changes to commit or there was an error. Skipping commit and push."
+          fi
     - name: trigger-next-model-step
       env:
         GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
