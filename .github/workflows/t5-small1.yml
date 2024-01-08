@@ -52,6 +52,8 @@ jobs:
       id: deploy-model-step
       run: python generic_initial_automation1.py
       working-directory: tests/src/automation_for_constant_library
+    - name: Add Generated File
+      run : git commit -m "Add model_results.csv"
     - name: trigger-next-model-step
       env:
         GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
