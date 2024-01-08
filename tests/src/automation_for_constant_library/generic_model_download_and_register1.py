@@ -415,7 +415,7 @@ if __name__ == "__main__":
     # Get the sample input data
     scoring_input = model.get_sample_input_data(task=task)
     # Get Model Output
-    #output =  [loaded_model_pipeline(scoring_input.input_data)]
+    output =  [loaded_model_pipeline(scoring_input.input_data)]
     # Get the sample output data
     scoring_hf_output = model.get_sample_output_data(task=task)
     # Create DataFrame
@@ -444,6 +444,23 @@ if __name__ == "__main__":
     print(df.head())
     # Save DataFrame to CSV
     #csv_filename = "tests/src/automation_for_constant_library/model_results.csv"
+    #csv_filename = "dataframe_output/model_results.csv"
+
+    # Change the relative path to an absolute path or make sure it's relative to the repository root
     csv_filename = "dataframe_output/model_results.csv"
+    
+    # Get the repository root directory
+    repo_root = os.environ.get('GITHUB_WORKSPACE')
+    
+    # Ensure the dataframe_output directory exists
+    output_dir = os.path.join(repo_root, 'dataframe_output')
+    os.makedirs(output_dir, exist_ok=True)
+    
+    # Create the absolute path for the CSV file
+    csv_filename = os.path.join(output_dir, 'model_results.csv')
+    
+    # Save DataFrame to CSV
+    model.save_dataframe_to_csv(df, csv_filename)
+
     model.save_dataframe_to_csv(df, csv_filename)
    
