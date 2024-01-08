@@ -415,7 +415,7 @@ if __name__ == "__main__":
     # Get the sample input data
     scoring_input = model.get_sample_input_data(task=task)
     # Get Model Output
-    output =  [loaded_model_pipeline(scoring_input.input_data)]
+    #output =  [loaded_model_pipeline(scoring_input.input_data)]
     # Get the sample output data
     scoring_hf_output = model.get_sample_output_data(task=task)
     # Create DataFrame
@@ -460,7 +460,5 @@ if __name__ == "__main__":
     csv_filename = os.path.join(output_dir, 'model_results.csv')
     
     # Save DataFrame to CSV
-    model.save_dataframe_to_csv(df, csv_filename)
-
     model.save_dataframe_to_csv(df, csv_filename)
    
