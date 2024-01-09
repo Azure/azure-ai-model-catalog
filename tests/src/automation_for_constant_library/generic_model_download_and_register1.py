@@ -450,15 +450,15 @@ if __name__ == "__main__":
     # Change the relative path to an absolute path or make sure it's relative to the repository root
     csv_filename = "dataframe_output/model_results.csv"
     
-    # Get the repository root directory
-    repo_root = os.environ.get('GITHUB_WORKSPACE')
+    # # Get the repository root directory
+    # repo_root = os.environ.get('GITHUB_WORKSPACE')
     
-    # Ensure the dataframe_output directory exists
-    output_dir = os.path.join(repo_root, 'dataframe_output')
-    os.makedirs(output_dir, exist_ok=True)
+    # # Ensure the dataframe_output directory exists
+    # output_dir = os.path.join(repo_root, 'dataframe_output')
+    # os.makedirs(output_dir, exist_ok=True)
     
-    # Create the absolute path for the CSV file
-    csv_filename = os.path.join(output_dir, 'model_results.csv')
+    # # Create the absolute path for the CSV file
+    # csv_filename = os.path.join(output_dir, 'model_results.csv')
     
     # Save DataFrame to CSV
     model.save_dataframe_to_csv(df, csv_filename)
