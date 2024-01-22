@@ -21,9 +21,9 @@ jobs:
       uses: azure/login@v1
       with:
         creds: ${{secrets.AZ_CRED}}
-    # - name: set-hf-token
-    #   run: echo "HF_token=${{ secrets.HF_TOKEN }}" >> $GITHUB_ENV
-
+    - name: set-hugging-face-token
+      run: echo "HF_TOKEN=${{secrets.HF_TOKEN}}" >> $GITHUB_ENV
+    
     - name: pip-install-azure-ai-ml
       run: pip install azure-ai-ml
     - name: pip-install-azureml-core
@@ -57,5 +57,6 @@ jobs:
     - name: trigger-next-model-step
       env:
         GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
+        HF_TOKEN: ${{ secrets.HF_TOKEN }}
       if: ${{ env.test_trigger_next_model == 'true' && steps.deploy-model-step.outputs.NEXT_MODEL != '' && (success() || failure())}}
       run: gh workflow run ${{ steps.deploy-model-step.outputs.NEXT_MODEL }} --ref ${{ github.ref_name }}
