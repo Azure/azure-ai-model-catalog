@@ -1,8 +1,8 @@
 {
     "queue_name": "test-southcentralus-1",
     "models": [
-       "HF-eval-distilroberta-base",
-       "HF-eval-distilgpt2"
+       "distilroberta-base",
+       "distilgpt2"
 
 
 
