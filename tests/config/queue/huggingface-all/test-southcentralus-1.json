@@ -1,9 +1,9 @@
 {
     "queue_name": "test-southcentralus-1",
     "models": [
-       "deepset/minilm-uncased-squad2"
-,"distilbert-base-uncased-distilled-squad"
-,"distilbert-base-cased-distilled-squad"
+       "HF-eval-distilroberta-base",
+       "HF-eval-distilgpt2"
+
 
 
     ],
