@@ -14,7 +14,7 @@ class ModelDetail:
         if len(version_list) == 0:
             logger.info("Model not found in registry")
         else:
-            #model_version = version_list[0].version
+            # model_version = version_list[0].version
             model_version = 10
             foundation_model = self.workspace_ml_client.models.get(
                 model_name, model_version)
