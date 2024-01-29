@@ -246,7 +246,8 @@ if __name__ == "__main__":
         )
         registry_ml_client = MLClient(
             credential=credential,
-            registry_name="azureml-preview-test1"
+            #registry_name="azureml-preview-test1"
+            registry_name="azureml"
         )
         azureml_registry = MLClient(credential, registry_name="azureml")
         
