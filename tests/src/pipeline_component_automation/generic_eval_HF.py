@@ -162,7 +162,7 @@ def evaluation_pipeline(task, mlflow_model, test_data, input_column_names, label
         logger.info("Started configuring the job")
         #data_path = "./datasets/translation.json"
         pipeline_component_func = registry_ml_client.components.get(
-            name="mlflow_oss_model_evaluation_pipeline", version="0.0.21"
+            name="model_evaluation_pipeline", version="0.0.21"
         )
         evaluation_job = pipeline_component_func(
             # specify the foundation model available in the azureml system registry or a model from the workspace
