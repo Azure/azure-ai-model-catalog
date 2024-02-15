@@ -1,13 +1,12 @@
-name: MLFlow-bert-base-cased
-
+name: MLFlow-google-bert-bert-base-cased
 on: 
   workflow_dispatch:
 
 env:
-  test_model_name: bert-base-cased
+  test_model_name: google-bert/bert-base-cased
   test_sku_type: cpu
   test_trigger_next_model: true
-  test_queue: sonata-test-ws
+  test_queue: test-northeurope-0
   test_set: huggingface-all
   test_keep_looping: false
 
