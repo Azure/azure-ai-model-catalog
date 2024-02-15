@@ -173,24 +173,21 @@ class Model:
         try:
             # Load the library from the transformer
             model_library = getattr(transformers, model_library_name)
-            with open("hf_cred.json", "r") as f:    
-                config = json.load(f) 
-                ACCESS_TOKEN = config["huggingface_token"]
-            login(token=ACCESS_TOKEN)
+            #login(token=ACCESS_TOKEN)
             logger.info("Started loading the model from library")
             # From the library load the model
-            # model = model_library.from_pretrained(self.model_name)
-            # tokenizer = AutoTokenizer.from_pretrained(self.model_name)
-            model = model_library.from_pretrained(
-                self.model_name, trust_remote_code=True, use_auth_token=True)
-            tokenizer = AutoTokenizer.from_pretrained(
-                self.model_name, trust_remote_code=True, use_auth_token=True)
+            model = model_library.from_pretrained(self.model_name)
+            tokenizer = AutoTokenizer.from_pretrained(self.model_name)
+            # model = model_library.from_pretrained(
+            #     self.model_name, trust_remote_code=True, use_auth_token=True)
+            # tokenizer = AutoTokenizer.from_pretrained(
+            #     self.model_name, trust_remote_code=True, use_auth_token=True)
         except Exception as ex:
             logger.error(
                 f"::Error:: This model : {self.model_name} or related tokenizer can not downloaded from the AutoModel or Autotokenizer\n {ex}")
             raise Exception(ex)
-              # model = model_library.from_pretrained(self.model_name, trust_remote_code=True, token=ACCESS_TOKEN)
-              # tokenizer = AutoTokenizer.from_pretrained(self.model_name, trust_remote_code=True, token=ACCESS_TOKEN)
+            # model = model_library.from_pretrained(self.model_name, trust_remote_code=True, token=ACCESS_TOKEN)
+            # tokenizer = AutoTokenizer.from_pretrained(self.model_name, trust_remote_code=True, token=ACCESS_TOKEN)
         model_and_tokenizer = {"model": model, "tokenizer": tokenizer}
         return model_and_tokenizer
 
